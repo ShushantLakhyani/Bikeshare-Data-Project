@@ -1,7 +1,8 @@
 import time
 import pandas as pd
 import numpy as np
-
+#add sample comment 1
+#add sample comment 2
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -28,7 +29,7 @@ def get_filters():
             break;
         else:
             print("Try again. Please enter a valid name. \n")
-        
+
     # TO DO: get user input for month (all, january, february, ... , june)
     #get user input for a valid month
     while True:
@@ -41,7 +42,7 @@ def get_filters():
             print("Try again. Please enter a valid month from the given options. \n")
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    #get user input for a valid day 
+    #get user input for a valid day
     while True:
         day = input("Please enter the weekday. Enter a weekday from all, monday, tuesday, wednesday, thrusday, friday, saturday or sunday \n").lower()
         weekday = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
@@ -71,18 +72,18 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
-    
+
     if month != 'all':
         months = ['january','february','march','april','may','june']
         month = months.index(month) + 1
         df = df[df['month'] == month]
-    
+
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
- 
+
 
     return df
-    
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -91,19 +92,19 @@ def time_stats(df):
     start_time = time.time()
 
     # TO DO: display the most common month
-   
+
     most_common_month = df['month'].mode()[0]
     print("Most common month is:", most_common_month)
     print("\n")
 
     # TO DO: display the most common day of week
-    
+
     most_common_weekday = df['day_of_week'].mode()[0]
     print("Most common Weekday is:", most_common_weekday)
     print("\n")
 
     # TO DO: display the most common start hour
-    
+
     most_common_hour = df['hour'].mode()[0]
     print("Most common hour is:", most_common_hour)
     print("\n")
@@ -132,7 +133,7 @@ def station_stats(df):
     filter_station = df.groupby(['Start Station','End Station']).size().sort_values(ascending = False).head(1)
     print("Most frequent combination of start station and end station is:\n ", filter_station)
     print("\n")
-    
+
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -194,7 +195,7 @@ def user_stats(df,city):
 
 def raw_data_check(df):
     # Get to know if user wants to input raw data
-    
+
     while (True):
             view_raw_data = input("Would you like to view 5 rows of data? Enter yes or no \n")
             start_loc = 0
@@ -217,9 +218,9 @@ def raw_data_check(df):
                 print("Try again. Please input as yes or no, any other input is not valid.")
                 continue
                 break
-                
-                
-                      
+
+
+
 def main():
     while True:
         city, month, day = get_filters()
